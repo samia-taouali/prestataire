@@ -12,7 +12,7 @@ require_once("connect.php");
     <link rel="stylesheet" href="commandes_rejeter.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Commandes en cours</title>
+    <title>Commandes Rejetées</title>
 </head>
 
 <body>
@@ -84,7 +84,7 @@ require_once("connect.php");
             <div class="s2  w-100">
                 <div class="section2">
                     <div class="title ">
-                        <h3>Commandes en cours</h3>
+                        <h3>Commandes Rejetées</h3>
                     </div>
                     <?php 
                         $sql = "SELECT * FROM `commande` INNER JOIN client c ON c.id_client = commande.id_client WHERE commande.statut_commande = 'Rejeter'";

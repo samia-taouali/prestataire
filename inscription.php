@@ -10,18 +10,18 @@ if(!empty($_SESSION["id_client"])){
     $telephone = $_POST["telephone"];
     $password = $_POST["password"];
     $confirmpassword = $_POST["confirmpassword"];
-    $duplicate = mysqli_query ( $conn, "SELECT * FROM client WHERE  email = '$email' ");
+    $duplicate = mysqli_query ( $conn, "SELECT * FROM prestataire WHERE  email = '$email' ");
     if(mysqli_num_rows($duplicate) > 0){
 
         echo "<script> alert('Email Has Already Taken'); </script>";
     }
     else{
         if($password == $confirmpassword){
-            $query = "INSERT INTO client (nom, prenom, numero_telephone, email, mot_de_passe) 
+            $query = "INSERT INTO prestataire (nom, prenom, numero_telephone, email, mot_de_passe) 
             VALUES ('$lastname', '$firstname', '$telephone', '$email', '$password')";  
         mysqli_query($conn, $query);
         echo"<script> alert('Registration Successful'); </script>";
-        header('Location:home.php');
+        header('Location:connexion.php');
         }
         else{
         echo
@@ -77,7 +77,7 @@ if(!empty($_SESSION["id_client"])){
                     </div>
                 </div>
                 <div class="btn"> <input type="submit" value="S'inscrire" name="submit"></div>
-                <p>vous avez déjà un compte? <span><a href="#" id="word">connectez -vous</a></span></p>
+                <p>vous avez déjà un compte? <span><a href="connexion.php" id="word">connectez -vous</a></span></p>
         </div>
         </form>
     </div>

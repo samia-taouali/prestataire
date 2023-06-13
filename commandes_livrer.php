@@ -10,7 +10,7 @@ require_once("connect.php");
     <link rel="stylesheet" href="commandes_livrer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Commandes en cours</title>
+    <title>Commandes Livrées</title>
 </head>
 
 <body>
@@ -82,7 +82,7 @@ require_once("connect.php");
             <div class="s2  w-100">
                 <div class="section2">
                     <div class="title ">
-                        <h3>Commandes en cours</h3>
+                        <h3>Commandes Livrées</h3>
                     </div>
                     <div class="cards">
                     <?php 
@@ -103,7 +103,7 @@ require_once("connect.php");
                                             <div class="adress"><?php echo $row["adresse_livraison"]; ?></div>
                                             <div class="date"><?php echo $row["date_validation"]; ?></div>
                                             <div class="buttons">
-                                              <input class="btn2" type="button" value="livrer" disabled>
+                                              <input class="btn2" type="button" value="livrer"disabled>
                                             </div>
                                         </form>
                                    </div>

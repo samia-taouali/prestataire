@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
   if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
   }
-  $sql = "SELECT * FROM client WHERE email='$email'";
+  $sql = "SELECT * FROM prestataire WHERE email='$email'";
   $result = $conn->query($sql);
   if ($result->num_rows == 1) {
     $user = $result->fetch_assoc();
@@ -50,10 +50,10 @@ if (isset($_POST['submit'])) {
       session_start();
 
       
-      $_SESSION['id_client'] = $user['id_client'];
+      $_SESSION['id_prestataire'] = $user['id_prestataire'];
    
       // Redirect the user to the home page
-      header('Location:home.php');
+      header('Location:nouveaux_commandes.php');
       exit();
       
     } else {

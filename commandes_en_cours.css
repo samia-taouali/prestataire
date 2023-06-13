@@ -72,8 +72,8 @@ padding:0.5rem 0;
     color: black;
 }
 .title{
-    display: flex;
-    width: 100%;
+display: flex;
+width: 100%;
     justify-content: center;
     padding-bottom: 1rem;
 }
@@ -81,11 +81,14 @@ padding:0.5rem 0;
 display: flex;
 flex-direction: column;
 align-items: center;
-border: 2px solid#3EB489;
 padding: 1rem 2rem;
-border-radius: 5px;
 gap: 0.5rem;
 }
+.card1{
+    border: 2px solid#3EB489;
+    width: 499.95px;
+    border-radius: 5px;
+    }
 .titre_commande{
     color: #3EB489;
    font-weight: 600;
@@ -103,10 +106,12 @@ display: flex;
 justify-content: center;
 }
 .cards {
- display: flex;
- flex-direction: row;
- gap: 2rem;
-}
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    flex-direction: row;
+    gap: 2rem;
+   }
 .list li{
     list-style: none;
 }
