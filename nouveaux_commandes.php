@@ -40,16 +40,18 @@ if(isset($_POST["valider"])){
                 <div><span><a href="">About us</a></span></div>
             </div>
             <div class="icons">
-                <div class="navbar_icons">
-                    <svg viewBox="0 0 31 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M29.2826 33.5452C27.3072 34.1129 24.9727 34.3749 22.2341 34.3749H8.76562C6.02704 34.3749 3.69253 34.1129 1.71716 33.5452C2.21101 27.8686 8.20444 23.3927 15.4999 23.3927C22.7953 23.3927 28.7888 27.8686 29.2826 33.5452Z"
-                            stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M23.536 9.44136C23.536 13.7644 19.9444 17.2796 15.4998 17.2796C11.0552 17.2796 7.46371 13.7644 7.46371 9.44136C7.46371 5.11839 11.0552 1.625 15.4998 1.625C19.9444 1.625 23.536 5.11839 23.536 9.44136Z"
-                            stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </div>
+            <a href="ajouter_service.php">
+                    <div class="navbar_icons">
+                        <svg viewBox="0 0 31 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M29.2826 33.5452C27.3072 34.1129 24.9727 34.3749 22.2341 34.3749H8.76562C6.02704 34.3749 3.69253 34.1129 1.71716 33.5452C2.21101 27.8686 8.20444 23.3927 15.4999 23.3927C22.7953 23.3927 28.7888 27.8686 29.2826 33.5452Z"
+                                stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M23.536 9.44136C23.536 13.7644 19.9444 17.2796 15.4998 17.2796C11.0552 17.2796 7.46371 13.7644 7.46371 9.44136C7.46371 5.11839 11.0552 1.625 15.4998 1.625C19.9444 1.625 23.536 5.11839 23.536 9.44136Z"
+                                stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                </a>
                 <div class="navbar_icons">
                     <svg viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -103,7 +105,7 @@ if(isset($_POST["valider"])){
                     </div>
                     <div class="cards">
                     <?php 
-                        $sql = "SELECT * FROM `commande` INNER JOIN client c ON c.id_client = commande.id_client WHERE commande.statut_commande IS NULL";
+                        $sql = "SELECT * FROM commande c INNER JOIN services s ON s.id_service = c.id_service WHERE s.id_prestataire = {$_SESSION['id_prestataire']}";
                         $result = mysqli_query($conn,$sql);
                         if(mysqli_num_rows($result)>0){
                             while($row = mysqli_fetch_array($result)){

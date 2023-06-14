@@ -1,6 +1,6 @@
 <?php 
 require 'connect.php';
-if(!empty($_SESSION["id_client"])){
+if(!empty($_SESSION["id_prestataire"])){
     header("Location: home.php");
     }
     if(isset($_POST["submit"])){
@@ -21,6 +21,7 @@ if(!empty($_SESSION["id_client"])){
             VALUES ('$lastname', '$firstname', '$telephone', '$email', '$password')";  
         mysqli_query($conn, $query);
         echo"<script> alert('Registration Successful'); </script>";
+        
         header('Location:connexion.php');
         }
         else{
