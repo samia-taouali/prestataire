@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `client` (
-  `id_client` int(11) NOT NULL,
+  `id_client` int(11) NOT NULL ,
   `nom` varchar(255) DEFAULT NULL,
   `prenom` varchar(255) DEFAULT NULL,
   `numero_telephone` varchar(20) DEFAULT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id_client`, `nom`, `prenom`, `numero_telephone`, `email`, `mot_de_passe`) VALUES
-(1, 'Jaaouan', 'Ashraf', '123', 'ashraf@gmail.com', 'ashraf123'),
+(1, 'Jaouane', 'Ashraf', '065656565', 'ashraf@gmail.com', 'ashraf123'),
 (2, 'Assaid', 'Amina', '0608091012', 'amina@gmail.com', 'amina123'),
 (3, 'Zentari', 'Maryam', '0608091012', 'maryam@gmail.com', 'maryam123'),
 (4, 'Samadi', 'Zaid', '0608091012', 'zaid@gmail.com', 'zaid123'),
@@ -57,11 +57,11 @@ INSERT INTO `client` (`id_client`, `nom`, `prenom`, `numero_telephone`, `email`,
 CREATE TABLE `commande` (
   `id_commande` int(11) NOT NULL,
   `titre` varchar(255) DEFAULT NULL,
-  `details` text DEFAULT NULL,
+  `details` varchar(255) DEFAULT NULL,
   `statut_commande` varchar(255) DEFAULT NULL,
-  `date_debut` date DEFAULT NULL,
-  `date_livraison` date DEFAULT NULL,
-  `date_validation` date DEFAULT NULL,
+  `date_debut` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date_livraison` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date_validation` timestamp NOT NULL DEFAULT current_timestamp(),
   `adresse_livraison` varchar(255) DEFAULT NULL,
   `id_client` int(11) DEFAULT NULL,
   `id_service` int(11) DEFAULT NULL
@@ -138,8 +138,8 @@ INSERT INTO `gallerie` (`id_image`, `image`, `type`, `id_service`) VALUES
 
 CREATE TABLE `prestataire` (
   `id_prestataire` int(11) NOT NULL,
-  `nom` int(100) DEFAULT NULL,
-  `prenom` int(100) DEFAULT NULL,
+  `nom` varchar(100) DEFAULT NULL,
+  `prenom` varchar(100) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `numero_telephone` varchar(20) DEFAULT NULL,
   `mot_de_passe` varchar(255) DEFAULT NULL,
@@ -158,6 +158,16 @@ INSERT INTO `prestataire` (`id_prestataire`, `nom`, `prenom`, `image`, `numero_t
 (5, 0, 0, NULL, '0656453423', 'haitam123', 'haitam@gmail.com');
 
 -- --------------------------------------------------------
+CREATE TABLE `categorie` (
+  `id_categorie` int(11) NOT NULL,
+  `categorie` varchar(255) DEFAULT NULL,
+  `image_categorie` varchar(255) DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
+
+
 
 --
 -- Structure de la table `services`
@@ -165,33 +175,26 @@ INSERT INTO `prestataire` (`id_prestataire`, `nom`, `prenom`, `image`, `numero_t
 
 CREATE TABLE `services` (
   `id_service` int(11) NOT NULL,
-  `image_categorie` varchar(255) DEFAULT NULL,
   `titre` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `categorie` varchar(255) DEFAULT NULL,
   `min_prix` decimal(10,2) DEFAULT NULL,
   `max_prix` decimal(10,2) DEFAULT NULL,
-  `id_prestataire` int(11) DEFAULT NULL
+  `id_prestataire` int(11) DEFAULT NULL,
+  `id_categorie` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `services`
 --
 
-INSERT INTO `services` (`id_service`, `image_categorie`, `titre`, `description`, `categorie`, `min_prix`, `max_prix`, `id_prestataire`) VALUES
-(1, 'imgs/catégorie6.svg', 'Jus naturels', 'jus naturels faites maison tu peux choisir les fruits que tu veux pour le jus y a des differents tailles 1L 20DH 2L 35DH 3L 70DH 4L 110DH 5L=130dh', 'produits faites maison', '20.00', '130.00', 1),
-(2, '', 'Confitures naturels', 'confitures naturel 100% fruits naturels sucrée et sons sucre ta le choix pour choisires pour les taille y a différents taille entre 270G et 1kg', 'produits faites maison', '80.00', '300.00', NULL),
-(3, '', 'epices faits maison', 'epices de la natures  broyées à la main tou ce qui ta cuisine veut', 'produits faites maison', '30.00', '300.00', NULL),
-(4, '', ' Glaces faits maison', 'découvrez nos incroyables Glaces origine 100% faites maison fruits que vous voulez des gouts magiques chocolat , cookies ,caramel et plein des aromes pour vous vous pouvez commandez de 500g jusqu a 3kg ', 'produits faites maison', '100.00', '500.00', NULL),
-(5, '', ' Salades fruits', 'Salades de fruits et dessert  avec des recettes originals pour donnerle vrai gout de salades les ingrédients naturel traditionels créer un gout origine  ', 'produits faites maison', '100.00', '500.00', NULL),
-(6, '', ' Les gateaux', ' découvrez notre spéciales patisserie ,des délicieux galettes ,gateaux ,tartes ce que vous voulez contactez nous pour plus d informations ', 'produits faites maison', '100.00', '1000.00', NULL),
-(13, 'imgs/catégorie1.svg', NULL, NULL, 'Beldi Couture', NULL, NULL, NULL),
-(14, 'imgs/catégorie2.svg', NULL, NULL, 'Soins Du Hammam', NULL, NULL, NULL),
-(15, 'imgs/catégorie3.svg', NULL, NULL, 'Beldi Cuisine', NULL, NULL, NULL),
-(16, 'imgs/catégorie4.svg', NULL, NULL, 'Bijoux', NULL, NULL, NULL),
-(17, 'imgs/catégorie5.svg', NULL, NULL, 'Produits Naturels', NULL, NULL, NULL),
-(54, NULL, 'YOUGURT', 'yougurt naturel sans produits chimiques', '', '25.00', '23.00', 1),
-(55, NULL, '', '', '', '0.00', '0.00', 1);
+INSERT INTO `services` (`id_service`, `titre`, `description`,  `min_prix`, `max_prix`) VALUES
+(1,  'Jus naturels', 'jus naturels faites maison tu peux choisir les fruits que tu veux pour le jus y a des differents tailles 1L 20DH 2L 35DH 3L 70DH 4L 110DH 5L=130dh', '20.00', '130.00'),
+(2,'Confitures naturels', 'confitures naturel 100% fruits naturels sucrée et sons sucre ta le choix pour choisires pour les taille y a différents taille entre 270G et 1kg', 'produits faites maison', '80.00', '300.00'),
+(3,'epices faits maison', 'epices de la natures  broyées à la main tou ce qui ta cuisine veut','30.00', '300.00'),
+(4,' Glaces faits maison', 'découvrez nos incroyables Glaces origine 100% faites maison fruits que vous voulez des gouts magiques chocolat , cookies ,caramel et plein des aromes pour vous vous pouvez commandez de 500g jusqu a 3kg ', '100.00', '500.00'),
+(5,' Salades fruits', 'Salades de fruits et dessert  avec des recettes originals pour donnerle vrai gout de salades les ingrédients naturel traditionels créer un gout origine  ', 'produits faites maison', '100.00', '500.00'),
+(6,' Les gateaux', ' découvrez notre spéciales patisserie ,des délicieux galettes ,gateaux ,tartes ce que vous voulez contactez nous pour plus d informations ', '100.00', '1000.00'),
+
 
 --
 -- Index pour les tables déchargées
@@ -232,14 +235,17 @@ ALTER TABLE `gallerie`
 ALTER TABLE `prestataire`
   ADD PRIMARY KEY (`id_prestataire`);
 
---
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`id_categorie`),
 -- Index pour la table `services`
 --
 ALTER TABLE `services`
   ADD PRIMARY KEY (`id_service`),
   ADD KEY `id_prestataire` (`id_prestataire`);
+  ADD KEY `id_categorie` (`id_categorie`);
 
 --
+
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -287,27 +293,29 @@ ALTER TABLE `services`
 -- Contraintes pour la table `commande`
 --
 ALTER TABLE `commande`
-  ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`),
-  ADD CONSTRAINT `commande_ibfk_2` FOREIGN KEY (`id_service`) REFERENCES `services` (`id_service`);
+  ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`)ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `commande_ibfk_2` FOREIGN KEY (`id_service`) REFERENCES `services` (`id_service`)ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`),
-  ADD CONSTRAINT `commentaire_ibfk_2` FOREIGN KEY (`id_service`) REFERENCES `services` (`id_service`);
+  ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `commentaire_ibfk_2` FOREIGN KEY (`id_service`) REFERENCES `services` (`id_service`)ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `gallerie`
 --
 ALTER TABLE `gallerie`
-  ADD CONSTRAINT `gallerie_ibfk_1` FOREIGN KEY (`id_service`) REFERENCES `services` (`id_service`);
+  ADD CONSTRAINT `gallerie_ibfk_1` FOREIGN KEY (`id_service`) REFERENCES `services` (`id_service`)ON DELETE CASCADE ON UPDATE CASCADE;
+
 
 --
 -- Contraintes pour la table `services`
 --
 ALTER TABLE `services`
-  ADD CONSTRAINT `services_ibfk_1` FOREIGN KEY (`id_prestataire`) REFERENCES `prestataire` (`id_prestataire`);
+  ADD CONSTRAINT `services_ibfk_1` FOREIGN KEY (`id_prestataire`) REFERENCES `prestataire` (`id_prestataire`)ON DELETE CASCADE ON UPDATE CASCADE;
+   ADD CONSTRAINT `services_ibfk_1` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`id_categorie`)ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
