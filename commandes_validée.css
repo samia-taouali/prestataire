@@ -54,6 +54,7 @@ align-items: center;
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    
     background-color: rgba(62, 180, 137, 0.19);
     height: 100%;
 }
@@ -72,23 +73,23 @@ padding:0.5rem 0;
     color: black;
 }
 .title{
-display: flex;
-width: 100%;
+    display: flex;
+    width: 100%;
     justify-content: center;
     padding-bottom: 1rem;
 }
 .card1 form{
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 1rem 2rem;
-gap: 0.5rem;
-}
-.card1{
-    border: 2px solid#3EB489;
-    width: 499.95px;
-    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 2rem;
+    gap: 0.5rem;
     }
+    .card1{
+        border: 2px solid#3EB489;
+        width: 499.95px;
+        border-radius: 5px;
+        }
 .titre_commande{
     color: #3EB489;
    font-weight: 600;
@@ -109,10 +110,9 @@ justify-content: center;
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
-   
     flex-direction: row;
     gap: 2rem;
-   }
+    }
 .list li{
     list-style: none;
 }
@@ -139,7 +139,7 @@ gap: 2rem;
     border: none;
     background-color: #3EB489;
     color: white;
-    padding: 0.5rem  2rem;
+    padding: 0.5rem  1.5rem;
     border-radius: 5px;
 }
 .description{

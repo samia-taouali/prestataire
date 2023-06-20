@@ -112,6 +112,7 @@ justify-content: center;
  flex-wrap: wrap;
  align-items: stretch;
  flex-direction: row;
+ padding: 0rem 5rem;
  gap: 2rem;
 }
 .list li{

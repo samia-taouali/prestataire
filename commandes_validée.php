@@ -1,9 +1,8 @@
-
 <?php 
 require_once("connect.php");
-if(isset($_POST["livrer"])){
+if(isset($_POST["valider"])){
     $id_commande = $_POST["id_commande"];
-    $sql = "UPDATE commande SET statut_commande = 'Livrer' WHERE id_commande = '$id_commande'";
+    $sql = "UPDATE commande SET statut_commande = 'En cours' WHERE id_commande = '$id_commande'";
     $result = mysqli_query($conn, $sql);
     if($result){
         header("refresh:0");
@@ -17,10 +16,10 @@ if(isset($_POST["livrer"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="commandes_en_cours.css">
+    <link rel="stylesheet" href="commandes_validée.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Commandes en cours</title>
+    <title>Commandes Validées</title>
 </head>
 
 <body>
@@ -63,8 +62,9 @@ if(isset($_POST["livrer"])){
                 </a>
             </div>
         </nav>
-        <div class="details d-flex flex-row h-100">
-            <div class="section1 col-md-2 ">
+        <div class="details d-flex flex-row  h-100">
+
+            <div class="section1 col-md-2 h-100">
                 <div class="titre1">
                     <h3>Mon profil</h3>
                 </div>
@@ -95,11 +95,11 @@ if(isset($_POST["livrer"])){
             <div class="s2  w-100">
                 <div class="section2">
                     <div class="title ">
-                        <h3>Commandes en cours</h3>
+                        <h3>Commandes Validées</h3>
                     </div>
                     <div class="cards">
-                    <?php 
-                        $sql = "SELECT * FROM `commande` INNER JOIN client c ON c.id_client = commande.id_client WHERE commande.statut_commande = 'En cours'";
+                        <?php 
+                        $sql = "SELECT * FROM `commande` INNER JOIN client c ON c.id_client = commande.id_client WHERE commande.statut_commande = 'Valider'";
                         $result = mysqli_query($conn,$sql);
                         if(mysqli_num_rows($result)>0){
                             while($row = mysqli_fetch_array($result)){
@@ -114,25 +114,26 @@ if(isset($_POST["livrer"])){
                                                 </p>
                                             </div>
                                             <div class="adress"><?php echo $row["adresse_livraison"]; ?></div>
-                                            <div class="date"><?php echo $row["date_debut"]; ?></div>
+                                            <div class="date"><?php echo $row["date_validation"]; ?></div>
                                             <div class="buttons">
                                                 <input type="hidden" name="id_commande" value="<?php echo $row["id_commande"]; ?>">
-                                                <input class="btn1" type="button" value="En cours" disabled>
-                                                <input class="btn2" type="submit" name="livrer" value="Livrer">
+                                                <input class="btn1" type="button" value="Valider" disabled>
+                                                <input class="btn2" type="submit" name="valider" value="en cours">
                                             </div>
                                         </form>
                                    </div>
                                 <?php
                             }
-    
                         }else{
                             echo "Aucune commande trouver";
                         }
-                        
+                       
+
                         
                         
                         ?>
-                        
+                       
+                       
                     </div>
                 </div>
             </div>
