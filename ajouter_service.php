@@ -8,24 +8,53 @@ else{
 }
 $result = mysqli_query($conn, "SELECT * FROM services ");
 $row = mysqli_fetch_assoc($result);
-// if(isset($_POST["submit"])){
-// //     $categorie = $_POST["categorie"];
-// //     $result = mysqli_query($conn, "SELECT * FROM categorie WHERE categorie=$categorie");
-// //     $row = mysqli_fetch_assoc($result);
-// //     $id_categorie=$row['id_categorie'];
-// //   $min_prix = $_POST["min_prix"];
-// //   $max_prix = $_POST["max_prix"];
-// //   $titre = $_POST["titre"];
-// //   $description = $_POST["description"];
-// //   $sql = "INSERT INTO `services`( `titre`, `description`, `min_prix`, `max_prix`, `id_prestataire`, `id_categorie`)
-// //   VALUES ('$titre','$description ','$min_prix','$max_prix','$id_prestataire','$id_categorie')";
-// //   $query = mysqli_query($conn,$sql);
-//   if ($conn->query($sql) === TRUE) {
-//     $id_service = $conn->insert_id;
-//     include_once("image_service.php");
-//   }
-//   exit();
-// }
+if (isset($_POST["submit"])) {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+    $categorie = $_POST["categorie"];
+    $result = mysqli_query($conn, "SELECT * FROM categorie WHERE categorie='$categorie'");
+    $row = mysqli_fetch_assoc($result);
+
+    $id_categorie = $row['id_categorie'];
+    $min_prix = $_POST["min_prix"];
+    $max_prix = $_POST["max_prix"];
+    $titre = $_POST["titre"];
+    $description = $_POST["description"];
+    $sql = "INSERT INTO `services` (`titre`, `description`, `min_prix`, `max_prix`, `id_prestataire`, `id_categorie`)
+    VALUES ('$titre','$description','$min_prix','$max_prix','$id_prestataire','$id_categorie')";
+
+    if ($conn->query($sql) === TRUE) {
+        $id_service = $conn->insert_id;
+        $images_main = $_FILES["image_principale"]["name"];
+        $tmp_main = $_FILES["image_principale"]["tmp_name"];
+        $dossier_main = "../fil-rouge-master-master/imgs/" . $images_main;
+        $fichier_main = "imgs/" . $images_main;
+
+        move_uploaded_file($tmp_main, $dossier_main);
+
+        $sql_gallery_main = "INSERT INTO gallerie (`image`, `type`, `id_service`) VALUES ('$fichier_main', 'primaire', '$id_service')";
+        $query_gallery_main = mysqli_query($conn, $sql_gallery_main);
+        $imagesNumber = count($_FILES["images"]["name"]);
+
+        if ($imagesNumber > 0) {
+            for ($i = 0; $i < $imagesNumber; $i++) {
+                $images_secondaire = $_FILES["images"]["name"][$i];
+                $tmp_secondaire = $_FILES["images"]["tmp_name"][$i];
+                $dossier_secondaire = "../fil-rouge-master-master/imgs/" . $images_secondaire;
+                $fichier_secondaire = "imgs/" . $images_secondaire;
+
+                move_uploaded_file($tmp_secondaire, $dossier_secondaire);
+                $typImg = 'secondaire';
+                $sql_gallery_secondaire = "INSERT INTO `gallerie`(`image`, `type`, `id_service`) VALUES ('$fichier_secondaire', '$typImg', '$id_service')";
+                $query_gallery_secondaire = mysqli_query($conn, $sql_gallery_secondaire);
+            }
+        }
+
+        header('location: mes_services.php');
+        exit();
+    }
+}
 ?>
 
 <html lang="en">
@@ -81,7 +110,7 @@ $row = mysqli_fetch_assoc($result);
             </div>
         </nav>
         <div class="section d-flex justify-content-center">
-            <form class="w-50 mb-5" action="image_service.php" method="post" enctype="multipart/form-data">
+            <form class="w-50 mb-5" action="" method="post" enctype="multipart/form-data">
                 <h2 class="text-center mb-3">Ajouter un Service cate</h2>
                 <div class="first_inputs row my-3">
                     <div class="input1 col-md-6">
@@ -106,12 +135,12 @@ $row = mysqli_fetch_assoc($result);
                     <div>
                         <select name="categorie" id="" class="form-select col-md-12">
                             <option value="" selected>Catégorie</option>
-                            <option name="Beldi Couture" value="1">Beldi Couture</option>
-                            <option name="Soins du hammam" value="2">Soins du hammam</option>
-                            <option name="Beldi Cuisine" value="3">Beldi Cuisine</option>
-                            <option name="bijoux" value="4">bijoux</option>
-                            <option name="produits naturel" value="5">produits naturel</option>
-                            <option name="recettes faites maison" value="6">recettes faites maison</option>
+                            <option value="Beldi Couture">Beldi Couture</option>
+                            <option value="Soins du hammam">Soins du hammam</option>
+                            <option value="Beldi Cuisine" >Beldi Cuisine</option>
+                            <option value="bijoux" >bijoux</option>
+                            <option value="produits naturel" >produits naturel</option>
+                            <option value="recettes faites maison">recettes faites maison</option>
                         </select>
                     </div>
                 </div>

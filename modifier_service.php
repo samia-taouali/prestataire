@@ -34,7 +34,7 @@
                 <!-- icon2 -->
                 <a href="déconnexion.php">
                     <div class="navbar_icons">
-                        <svg width="12" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M22.0789 32H21.8764C14.9592 32 11.6252 29.2736 11.0488 23.1665C10.9864 22.5278 11.4538 21.9513 12.1082 21.889C12.7469 21.8267 13.3233 22.3096 13.3857 22.9484C13.8375 27.8403 16.1432 29.6631 21.892 29.6631H22.0945C28.4353 29.6631 30.6787 27.4197 30.6787 21.0789V10.9211C30.6787 4.58033 28.4353 2.3369 22.0945 2.3369H21.892C16.1121 2.3369 13.8063 4.19084 13.3857 9.17623C13.3078 9.81499 12.7781 10.2979 12.1082 10.2356C11.4538 10.1889 10.9864 9.61245 11.0332 8.9737C11.5629 2.77312 14.9124 0 21.8764 0H22.0789C29.7284 0 33.0001 3.27166 33.0001 10.9211V21.0789C33.0001 28.7283 29.7284 32 22.0789 32Z"
                                 fill="black" />
@@ -49,28 +49,37 @@
                 </a>
             </div>
         </nav>
+
+        <div class="titre" ><h1>Modifier Votre service</h1></div>
         <div class="details justify-content-center  d-flex d w-100">
-            <div class=" form1 col-md-4 ">
-                <div class=" mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Titre</label>
-                    <input type="textl" class="form-control" id="exampleFormControlInput1"
-                        placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="exampleFormControlInput1" class="form-label">Min Prix</label>
-                        <input type="text" class="form-control" placeholder="Min Prix" aria-label="First name">
+
+            <form class=" form1 col-md-4 " action="" method="POST">
+                
+                <div>
+                    <div class=" mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Titre</label>
+                        <input type="textl" class="form-control" id="exampleFormControlInput1">
                     </div>
-                    <div class="col">
-                        <label for="exampleFormControlInput1" class="form-label">Max Prixs</label>
-                        <input type="text" class="form-control" placeholder="Max Prix" aria-label="Last name">
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="exampleFormControlInput1" class="form-label">Min Prix</label>
+                            <input type="text" class="form-control" placeholder="Min Prix" aria-label="First name">
+                        </div>
+                        <div class="col">
+                            <label for="exampleFormControlInput1" class="form-label">Max Prixs</label>
+                            <input type="text" class="form-control" placeholder="Max Prix" aria-label="Last name">
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="d-grid gap-2 mt-3">
+                    <button class="btn btn-primary"style="background-color:#3EB489;border:none" type="button">Button</button>
+        
+                </div>
+            </form>
 
 
             <div class="part2 d-flex justify-content-center col-md-3 mt-5">
